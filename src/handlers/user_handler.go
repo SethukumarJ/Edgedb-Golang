@@ -199,7 +199,7 @@ func UpdateProfile(c *gin.Context) {
 		utils.ResponseJSON(*c, response)
 		return
 	}
-	err = userUsecase.SendSubmissionMail(email)
+	err = userUsecase.SendSubmissionMail(user.Email)
 
 	fmt.Println(err)
 

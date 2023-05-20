@@ -20,7 +20,10 @@ func (c *userUseCase) UpdateProfile(ctx context.Context, profile models.Profile,
 	var user models.User
 
 	userRepo := repositories.NewUserRepository()
-	user, err := userRepo.UpdateProfile(ctx, profile, id)
+	u , err := userRepo.GetAll(ctx)
+
+	fmt.Println("getall",u, err, "err")
+	user, err = userRepo.UpdateProfile(ctx, profile, id)
 
 	return user, err
 
@@ -70,6 +73,9 @@ func (c *userUseCase) Save(ctx context.Context, user models.User) (models.User, 
 
 	userRepo := repositories.NewUserRepository()
 	_, err := userRepo.FindByName(ctx, user.Email)
+
+	getAll, _ := userRepo.GetAll(ctx)
+	fmt.Println("getAll",getAll)
 	if err == nil {
 
 		return models.User{}, errors.New("email already exists")

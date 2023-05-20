@@ -3,15 +3,15 @@ package models
 import "github.com/edgedb/edgedb-go"
 
 type User struct {
-	ID           edgedb.UUID `json:"id" edgedb:"id"`
-	FirstName    string      `json:"first_name" edgedb:"firstname"`
-	LastName     string      `json:"last_name" edgedb:"lastname"`
-	DOB          string      `json:"date_of_birth" edgedb:"dob"`
-	Email        string      `json:"email" edgedb:"email"`
-	Password     string      `json:"password" edgedb:"password"`
-	Phone        string      `json:"phone" edgedb:"phone"`
-	CV           string      `json:"cv" edgedb:"cv"`
-	Verified     bool        `json:"verified" edgedb:"verified"`
+	ID           edgedb.UUID `edgedb:"id"`
+	FirstName    string      `edgedb:"firstname"`
+	LastName     string      `edgedb:"lastname"`
+	DOB          string      `edgedb:"dob"`
+	Email        string      `edgedb:"email"`
+	Password     string      `edgedb:"password"`
+	Phone        string      `edgedb:"phone"`
+	CV           string      `edgedb:"cv"`
+	Verified     bool        `edgedb:"verified"`
 	AccessToken  string      `edgedb:"accesstoken"`
 	RefreshToken string      `edgedb:"refreshtoken"`
 }
