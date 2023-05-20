@@ -1,0 +1,184 @@
+basePath: /
+definitions:
+  models.Login:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.Profile:
+    properties:
+      cv:
+        type: string
+      date_of_birth:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+    type: object
+  models.RefreshToken:
+    properties:
+      refreshtoken:
+        type: string
+    type: object
+  models.SignUp:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  response.Response:
+    properties:
+      data: {}
+      errors: {}
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+host: localhost:5000
+info:
+  contact:
+    email: sethukumarj.76@gmail.com
+    name: API Support
+    url: sethukumarj.com
+  description: This is an Event Management project. You can visit the GitHub repository
+    at https://github.com/SethukumarJ/TRX-backend
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: signup/signin form API
+  version: "1.0"
+paths:
+  /user/get:
+    get:
+      operationId: Get user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get user
+      tags:
+      - Profile
+  /user/login:
+    post:
+      operationId: User Login
+      parameters:
+      - description: 'userlogin: '
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/models.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Login for users
+      tags:
+      - Authentication
+  /user/profile:
+    patch:
+      operationId: User profile
+      parameters:
+      - description: user profile update
+        in: body
+        name: updateProfile
+        required: true
+        schema:
+          $ref: '#/definitions/models.Profile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: update profile for users
+      tags:
+      - Authentication
+  /user/signup:
+    post:
+      operationId: Admin signup
+      parameters:
+      - description: user signup
+        in: body
+        name: Signup
+        required: true
+        schema:
+          $ref: '#/definitions/models.SignUp'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: SignUp for Admin
+      tags:
+      - Authentication
+  /user/token-refresh:
+    post:
+      operationId: User RefreshToken
+      parameters:
+      - description: 'generate refresh token: '
+        in: body
+        name: refreshToken
+        required: true
+        schema:
+          $ref: '#/definitions/models.RefreshToken'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Refresh token for users
+      tags:
+      - Authentication
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
